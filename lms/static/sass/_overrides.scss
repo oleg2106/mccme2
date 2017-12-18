@@ -1,5 +1,6 @@
 $header_height: 45px;
-
+$seq_arrow_width: 50px;
+$seq_arrow_margin: $seq_arrow_width + 30px;
 
 /* MAIN section */
 html body {
@@ -173,4 +174,46 @@ $i: 0;
     line-height: 1.5;
     padding: 1em 0;
     border-bottom: 1px solid #ccc;
+}
+
+
+/* CONTENT section */
+/* course page styles */
+#seq_content {
+    margin: 0 $seq_arrow_margin;
+}
+
+.seq-arrow {
+    width: $seq_arrow_width;
+    height: $seq_arrow_width;
+}
+    
+.seq-arrow .fa{
+    color: #212b2b;
+    font-size: 1.3rem;
+}
+
+.seq-arrow .arrow {
+    z-index: 1500;
+    position: fixed;
+/*     top: 55%; */
+    width: $seq_arrow_width;
+    height: $seq_arrow_width;
+}
+
+.xmodule_display.xmodule_SequenceModule .seq-arrow .arrow .sequence-nav-button {
+    background-color: inherit;
+    border: none;
+    width: $seq_arrow_width;
+    min-width: $seq_arrow_width;
+    padding: 0;
+}
+
+.xmodule_display.xmodule_SequenceModule .seq-arrow .arrow .sequence-nav-button:disabled {
+    display: none;
+}
+
+.xmodule_display.xmodule_SequenceModule .seq-arrow .arrow .sequence-nav-button:hover {
+    background-color: #f1f2f2;
+    border-radius: 35px;
 }
