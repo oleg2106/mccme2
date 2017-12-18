@@ -1,0 +1,9 @@
+// Bootstrap
+@import 'edx-bootstrap/sass/open-edx/theme';
+@import 'bootstrap/scss/bootstrap';
+
+// Import the original styles from edx-platform.
+@import 'lms/static/sass/lms-main-v2';
+
+// Our custom sass start here
+@import 'overrides';

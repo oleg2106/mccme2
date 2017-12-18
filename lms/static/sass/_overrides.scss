@@ -1,0 +1,176 @@
+$header_height: 45px;
+
+
+/* MAIN section */
+html body {
+    padding-top: $header_height;
+}
+
+body .container > div {
+    border: none;
+}
+
+body .window-wrap {
+    background-color: #fff;
+}
+
+body .content-wrapper .container {
+    border: none;
+}
+
+
+/* HEADER section */
+#global-navigation {
+    position: fixed;
+    top: 0;
+    border-bottom: solid 1px #f1f2f2;
+    padding: 0;
+    height: $header_height;
+    width: 100%;
+    line-height: 1.4;
+    z-index: 10;
+}
+
+#global-navigation .wrapper-header {
+    padding: 0;
+    height: $header_height;
+}
+
+#global-navigation .logo-header {
+    font-size: 2rem;
+}
+
+#global-navigation .logo {
+    margin: 0;
+}
+
+#global-navigation .logo img {
+    height: 40px;
+    margin: 0;
+}
+
+#global-navigation .doc-link {
+    display: none;
+}
+
+#global-navigation .logo-header, 
+#global-navigation .course-header {
+    width: auto;
+    line-height: 1.4;    
+}
+
+#global-navigation .course-header {
+    text-align: center;
+    font-size: 0.8rem;
+    margin: 10px 10px 0px 10px;
+}
+
+#global-navigation .logo img {
+    vertical-align: -15%;
+}
+
+
+/* COURSE TABS section */
+ .wrapper-course-material {
+    text-align: center;
+}
+
+.progress.wrapper-course-material{
+    background-color: white;
+}
+
+.wrapper-course-material .course-tabs li a:hover {
+    color: #333;
+}
+
+
+/* PROGRESS section */
+.digit-b {
+    font-size: 4em;
+    line-height: 0.4em;
+}
+
+.digit-b-left {
+    float: left;
+}
+
+.digit-b-item {
+    line-height: 0.8em;
+}
+
+.digit-b-right {
+    font-size: 0.5em;
+    vertical-align: baseline;
+}
+
+.progress-header-summary {
+    font-size: 0.35em;
+}
+
+#main-progress-bar-striped-version2{
+    margin: 40px 0;
+}
+
+#main-progress-bar-striped-version2 .legend{
+    margin-bottom: 10px;
+}
+
+.progress.progress-striped {
+    margin-bottom: 5px;
+}
+
+#main-progress-bar-version2 {
+    background-color: #f5f5f5;
+}
+
+.grade-legend {
+    display: inline-block;
+    padding-left: 40px;
+}
+
+.grade-legend-item {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    padding: 2px;
+    border: 1px solid grey;
+}
+
+.grade-bar .increments {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.grade-bar .increments li {
+    font-size: 9px;
+    font-size: 0.9rem;
+    position: absolute;
+    top: -20px;
+    width: 30px;
+    margin-left: -15px;
+    text-align: center;
+}
+
+$i: 0;
+@while $i < 101 {
+    .increment-#{$i} { left: 0% + $i; }
+    $i: $i + 10;
+}
+
+#course-info-progress .chapters {
+    border: none;
+}
+
+.chapter_item:first-child {
+    border-top: 1px solid #ccc;
+}
+
+.chapter_item {
+    color: #000;
+    font-size: 1.4em;
+    line-height: 1.5;
+    padding: 1em 0;
+    border-bottom: 1px solid #ccc;
+}
