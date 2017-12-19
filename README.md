@@ -4,7 +4,7 @@
 
 1. Найдя за пределами пробирки директорию `themes` (непосредственно под той директорией где живет `Vagrantfile`) отправляемся туда и командуем:
 
-        git clone https://github.com/kursitet/comprehensive-theme-2 mccme2
+        git clone https://github.com/kursitet/mccme2 mccme2
 
     В результате, все файлы которые считаются частью темы и могут быть отредактированы и отправлены наверх, будут жить в `themes/mccme2`.
     
