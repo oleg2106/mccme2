@@ -12,8 +12,22 @@
 
 <div class="container-fluid wrapper-footer">
 <footer>
-    <div class="row">
-    <div class="col-md-12">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <a href="http://olimpiada.ru/">
+                <img class="footer_banner" src="${static.url('images/banner_olimpiada.png')}" title="olimpiada.ru">
+            </a>
+            <a href="http://vos.olimpiada.ru/">
+                <img class="footer_banner" src="${static.url('images/banner_vos.jpg')}" title="Всероссийская олимпиада в Москве">
+            </a>
+            <a href="http://mos.olimpiada.ru/">
+                <img class="footer_banner" src="${static.url('images/banner_mos.jpg')}" title="Московская олимпиада школьников">
+            </a>
+            <a href="http://fingram.olimpiada.ru/sample">
+                <img class="footer_banner" src="${static.url('images/banner_fin.png')}" title="Олимпиада по основам предпринимательства и финансовой грамотности">
+            </a>
+        </div>    
+    <div class="col col-md-12">
         <nav class="navbar site-nav navbar-toggleable-sm navbar-light" aria-label="${_('About')}">
         <ul class="navbar-nav">
             % for item_num, link in enumerate(footer['navigation_links'], start=1):
