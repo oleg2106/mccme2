@@ -112,6 +112,10 @@ body .content-wrapper .container {
     margin: 40px 0;
 }
 
+#main-progress-bar-striped-version2 .progress {
+    display: block;
+}
+
 #main-progress-bar-striped-version2 .legend{
     margin-bottom: 10px;
 }
@@ -121,7 +125,10 @@ body .content-wrapper .container {
 }
 
 #main-progress-bar-version2 {
+    float: right;
     background-color: #f5f5f5;
+    background-image: none;
+    height: 20px;
 }
 
 .grade-legend {
