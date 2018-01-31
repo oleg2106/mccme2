@@ -1,0 +1,126 @@
+/* Global */
+@font-face { 
+    font-family: "Open Sans"; 
+    font-style: normal; 
+    font-weight: 700; 
+    src: local("Open Sans Bold"), local("OpenSans-Bold"), url("https://fonts.gstatic.com/s/opensans/v15/k3k702ZOKiLJc3WVjuplzOgdm0LZdjqr5-oayXSOefg.woff2") format("woff2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
+}
+
+@font-face { 
+    font-family: "Open Sans"; 
+    font-style: normal; 
+    font-weight: 400; 
+    src: local("Open Sans Regular"), local("OpenSans-Regular"), url("https://fonts.gstatic.com/s/opensans/v15/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2") format("woff2");
+    unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
+}
+
+@font-face { 
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Open Sans Regular"), local("OpenSans-Regular"), url("https://fonts.gstatic.com/s/opensans/v15/RjgO7rYTmqiVp7vzi-Q5URJtnKITppOI_IvcXXDNrsc.woff2") format("woff2");
+    unicode-range: U+400-45F, U+490-491, U+4B0-4B1, U+2116;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    src: local("Open Sans SemiBold"), local("OpenSans-SemiBold"), url("https://fonts.gstatic.com/s/opensans/v15/MTP_ySUJH_bn48VBG8sNSugdm0LZdjqr5-oayXSOefg.woff2") format("woff2");
+    unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    src: local("Open Sans SemiBold"), local("OpenSans-SemiBold"), url("https://fonts.gstatic.com/s/opensans/v15/MTP_ySUJH_bn48VBG8sNSpX5f-9o1vgP2EXwfjgl7AY.woff2") format("woff2"); 
+    unicode-range: U+400-45F, U+490-491, U+4B0-4B1, U+2116;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Open Sans Bold"), local("OpenSans-Bold"), url("https://fonts.gstatic.com/s/opensans/v15/k3k702ZOKiLJc3WVjuplzJX5f-9o1vgP2EXwfjgl7AY.woff2") format("woff2"); unicode-range: U+400-45F, U+490-491, U+4B0-4B1, U+2116;
+}
+
+html {
+    font-size: 1em;
+    font-style: normal;
+    line-height: 1em;    
+}
+
+select{
+ font-family:sans-serif;
+ color:#222;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, label {
+    font-family: "Open Sans",Verdana,Geneva,sans-serif,sans-serif;    
+    font-weight: normal;
+    color: #292b2c;
+}
+
+h2 {
+    font: normal 1.2em/1.2em Georgia,Cambria,"Times New Roman",Times,serif;
+}
+
+label {
+    color: #3c3c3c;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+/* HEADER section */
+#global-navigation .dropdown-menu{
+    line-height: 1;
+}
+
+.header-global.slim .wrapper-header .course-header {
+    display: inline-block;
+}
+
+.dropdown-menu-container .menu-button {
+    margin: 0;
+}
+
+
+/* INFO section */
+.wrapper-preview-menu {
+    padding: 0;    
+}
+
+.wrapper-preview-menu .preview-menu {
+    padding: 15px 2%;
+}
+
+/* COURSE TABS section */
+.wrapper-course-material .course-tabs {
+    padding: 0;
+}
+
+.wrapper-course-material .course-tabs li a, .wrapper-course-material .course-tabs li a:visited {
+    color: #5e5e5e;
+}
+
+.wrapper-course-material .course-tabs li a {
+    line-height: 20.72px;
+}
+
+
+/* CONTENT section */
+.home .page-header-main .page-title {
+    color: #4a4a4a;
+}
+
+
+/* CONTENT section */
+footer .banners{    
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+}

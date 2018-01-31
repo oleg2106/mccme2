@@ -1,4 +1,5 @@
-$header_height: 45px;
+$header_height: 50px;
+$header_border: solid 1px #e7e7e7;
 $seq_arrow_width: 50px;
 $seq_arrow_margin: $seq_arrow_width + 30px;
 
@@ -7,7 +8,7 @@ html body {
     padding-top: $header_height;
 }
 
-body .container > div {
+/*body .container > div {
     border: none;
 }
 
@@ -17,6 +18,22 @@ body .window-wrap {
 
 body .content-wrapper .container {
     border: none;
+}*/
+
+
+/* Fixed menu */
+#global-navigation.topheader-free {
+    position: relative;
+}
+
+.course-material.fixed {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100% !important;
+    background-color: #fff;
+    border-bottom: $header_border;
+    text-align: left;    
 }
 
 
@@ -24,7 +41,7 @@ body .content-wrapper .container {
 #global-navigation {
     position: fixed;
     top: 0;
-    border-bottom: solid 1px #f1f2f2;
+    border-bottom: $header_border;
     padding: 0;
     height: $header_height;
     width: 100%;
@@ -35,10 +52,12 @@ body .content-wrapper .container {
 #global-navigation .wrapper-header {
     padding: 0;
     height: $header_height;
+    line-height: $header_height;
 }
 
-#global-navigation .logo-header {
-    font-size: 2rem;
+#global-navigation .wrapper-header .course-header{
+    float: none;
+    margin: 0 0 0 10px;
 }
 
 #global-navigation .logo {
@@ -54,26 +73,19 @@ body .content-wrapper .container {
     display: none;
 }
 
-#global-navigation .logo-header, 
-#global-navigation .course-header {
-    width: auto;
-    line-height: 1.4;    
-}
-
-#global-navigation .course-header {
-    text-align: center;
-    font-size: 0.8rem;
-    margin: 10px 10px 0px 10px;
-}
-
-#global-navigation .logo img {
-    vertical-align: -15%;
-}
-
 
 /* COURSE TABS section */
- .wrapper-course-material {
-    text-align: center;
+body #content .wrapper-course-material {
+    padding: 10px 0 0 0;
+}
+
+body #content .wrapper-course-material .course-material {
+    padding-top: 0;
+    height: $header_height;
+}
+
+body .wrapper-course-material .course-tabs li a, .wrapper-course-material .course-tabs li a:visited {
+    padding-top: 12px;
 }
 
 .progress.wrapper-course-material{
@@ -82,105 +94,6 @@ body .content-wrapper .container {
 
 .wrapper-course-material .course-tabs li a:hover {
     color: #333;
-}
-
-
-/* PROGRESS section */
-.digit-b {
-    font-size: 4em;
-    line-height: 0.4em;
-}
-
-.digit-b-left {
-    float: left;
-}
-
-.digit-b-item {
-    line-height: 0.8em;
-}
-
-.digit-b-right {
-    font-size: 0.5em;
-    vertical-align: baseline;
-}
-
-.progress-header-summary {
-    font-size: 0.35em;
-}
-
-#main-progress-bar-striped-version2{
-    margin: 40px 0;
-}
-
-#main-progress-bar-striped-version2 .progress {
-    display: block;
-}
-
-#main-progress-bar-striped-version2 .legend{
-    margin-bottom: 10px;
-}
-
-.progress.progress-striped {
-    margin-bottom: 5px;
-}
-
-#main-progress-bar-version2 {
-    float: right;
-    background-color: #f5f5f5;
-    background-image: none;
-    height: 20px;
-}
-
-.grade-legend {
-    display: inline-block;
-    padding-left: 40px;
-}
-
-.grade-legend-item {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    padding: 2px;
-    border: 1px solid grey;
-}
-
-.grade-bar .increments {
-    position: relative;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-.grade-bar .increments li {
-    font-size: 9px;
-    font-size: 0.9rem;
-    position: absolute;
-    top: -20px;
-    width: 30px;
-    margin-left: -15px;
-    text-align: center;
-}
-
-$i: 0;
-@while $i < 101 {
-    .increment-#{$i} { left: 0% + $i; }
-    $i: $i + 10;
-}
-
-#course-info-progress .chapters {
-    border: none;
-}
-
-.chapter_item:first-child {
-    border-top: 1px solid #ccc;
-}
-
-.chapter_item {
-    color: #000;
-    font-size: 1.4em;
-    line-height: 1.5;
-    padding: 1em 0;
-    border-bottom: 1px solid #ccc;
 }
 
 
@@ -225,6 +138,12 @@ $i: 0;
     border-radius: 35px;
 }
 
+body .course-wrapper .course-content .vert-mod .vert > .xblock-student_view, 
+body .course-wrapper .courseware-results-wrapper .vert-mod .vert > .xblock-student_view {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+    padding: 0 0 15px;
+}
 
 /* FOOTER styles */
 footer {

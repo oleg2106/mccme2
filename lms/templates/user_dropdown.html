@@ -14,6 +14,19 @@ from django.utils.translation import ugettext as _
 from openedx.core.djangoapps.user_api.accounts.image_helpers import get_profile_image_urls_for_user
 %>
 
+<%
+username = self.real_user.username
+profile_image_url = get_profile_image_urls_for_user(self.real_user)['medium']
+
+first_name = self.real_user.first_name
+last_name = self.real_user.last_name
+
+if first_name and last_name:
+    label_name = "%s %s" % (first_name, last_name)
+else:
+    label_name = username
+%>
+
 % if uses_bootstrap:
     <li class="nav-item nav-item-hidden-collapsed">
         <a href="${reverse('dashboard')}" class="menu-title">
@@ -40,12 +53,7 @@ from openedx.core.djangoapps.user_api.accounts.image_helpers import get_profile_
     <div class="wrapper-user-menu dropdown-menu-container logged-in js-header-user-menu">
         <a href="${reverse('dashboard')}" class="menu-title">
             <span class="sr-only">${_("Dashboard for:")}</span>
-            <%
-            username = self.real_user.username
-            profile_image_url = get_profile_image_urls_for_user(self.real_user)['medium']
-            %>
-            <img class="menu-image" src="${profile_image_url}" alt="">
-            ${username}
+            <span class="label-username">${label_name}</span>
         </a>
         <div role="group" aria-label="User menu" class="user-menu">
             <button type="button" class="menu-button button-more has-dropdown js-dropdown-button" aria-expanded="false" aria-controls="${_("Usermenu")}">
@@ -53,11 +61,6 @@ from openedx.core.djangoapps.user_api.accounts.image_helpers import get_profile_
                   <span class="sr-only">${_("Usermenu dropdown")}</span>
             </button>
             <ul class="dropdown-menu list-divided is-hidden" id="${_("Usermenu")}" tabindex="-1">
-                <%block name="navigation_dropdown_menu_links" >
-                    <li class="dropdown-item item has-block-link"><a href="${reverse('dashboard')}" role="menuitem" class="action dropdown-menuitem">${_("Dashboard")}</a></li>
-                    <li class="dropdown-item item has-block-link"><a href="${reverse('learner_profile', kwargs={'username': self.real_user.username})}" role="menuitem" class="action dropdown-menuitem">${_("Profile")}</a></li>
-                    <li class="dropdown-item item has-block-link"><a href="${reverse('account_settings')}" role="menuitem" class="action dropdown-menuitem">${_("Account")}</a></li>
-                </%block>
                 <li class="dropdown-item item has-block-link"><a href="${reverse('logout')}" role="menuitem" class="action dropdown-menuitem">${_("Sign Out")}</a></li>
             </ul>
         </div>
@@ -67,20 +70,7 @@ from openedx.core.djangoapps.user_api.accounts.image_helpers import get_profile_
         <li class="primary">
             <a href="${reverse('dashboard')}" class="user-link">
                 <span class="sr">${_("Dashboard for:")}</span>
-                <%
-                username = self.real_user.username
-                profile_image_url = get_profile_image_urls_for_user(self.real_user)['medium']
-                
-                first_name = self.real_user.first_name
-                last_name = self.real_user.last_name
-                
-                if first_name and last_name:
-                    label_name = "%s %s" % (first_name, last_name)
-                else:
-                    label_name = username
-                %>
-<!--                 <img class="user-image-frame" src="${profile_image_url}" alt=""> -->
-                <div class="label-username">${label_name}</div>
+                <span class="label-username">${label_name}</span>
             </a>
         </li>
         <li class="primary">
@@ -90,7 +80,6 @@ from openedx.core.djangoapps.user_api.accounts.image_helpers import get_profile_
                     <span class="fa fa-sort-desc" aria-hidden="true"></span>
                 </button>
                 <ul class="user-dropdown-menu" aria-label="More Options" role="menu">
-<!--                     ${navigation_dropdown_menu_links()} -->
                     <li class="item"><a href="${reverse('logout')}" role="menuitem" class="user-dropdown-menuitem">${_("Sign Out")}</a></li>
                 </ul>
             </div>

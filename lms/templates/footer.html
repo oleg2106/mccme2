@@ -13,7 +13,7 @@
 <div class="container-fluid wrapper-footer">
 <footer>
     <div class="row justify-content-center">
-        <div class="col-12 text-center">
+        <div class="col-12 text-center banners">
             <a href="http://olimpiada.ru/">
                 <img class="footer_banner" src="${static.url('images/banner_olimpiada.png')}" title="olimpiada.ru">
             </a>
@@ -27,7 +27,7 @@
                 <img class="footer_banner" src="${static.url('images/banner_fin.png')}" title="Олимпиада по основам предпринимательства и финансовой грамотности">
             </a>
         </div>    
-    <div class="col col-md-12">
+    <div class="footer-content">
         <nav class="navbar site-nav navbar-toggleable-sm navbar-light" aria-label="${_('About')}">
         <ul class="navbar-nav">
             % for item_num, link in enumerate(footer['navigation_links'], start=1):
