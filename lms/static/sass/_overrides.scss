@@ -55,13 +55,21 @@ body .content-wrapper .container {
     line-height: $header_height;
 }
 
-#global-navigation .wrapper-header .course-header{
+#global-navigation .course-header-wrapper {
+    display: table;
+    height: $header_height;
+}
+
+#global-navigation .wrapper-header .course-header {
     float: none;
-    margin: 0 0 0 10px;
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0;
+    width: auto;
 }
 
 #global-navigation .logo {
-    margin: 0;
+    margin: 0 10px 0 0;
 }
 
 #global-navigation .logo img {
