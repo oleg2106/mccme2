@@ -121,6 +121,19 @@ body .wrapper-course-material .course-tabs li a, .wrapper-course-material .cours
     height: $seq_arrow_width;
 }
 
+.xblock.xmodule_display.xmodule_SequenceModule .sequence-nav ol li:first-child {
+    border-left-style: solid;
+}
+
+.xblock.xmodule_display.xmodule_SequenceModule .sequence-nav ol li:last-child {
+    border-right-style: solid;
+}
+
+body .course-wrapper .course-content .vert-mod .vert > .xblock-student_view, 
+body .course-wrapper .courseware-results-wrapper .vert-mod .vert > .xblock-student_view {
+    border-bottom: none;
+}
+
 .xmodule_display.xmodule_SequenceModule .seq-arrow .arrow .sequence-nav-button {
     background-color: inherit;
     border: none;

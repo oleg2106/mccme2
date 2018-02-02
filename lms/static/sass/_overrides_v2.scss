@@ -117,8 +117,17 @@ label {
     color: #4a4a4a;
 }
 
+.xmodule_display.xmodule_SequenceModule .sequence-nav ol li:not(:last-child) {
+    border-right-style: none;
+    border-left-style: solid;
+}
 
-/* CONTENT section */
+.xmodule_display.xmodule_SequenceModule .sequence-nav ol li:last-child {
+    border-right-style: solid;
+}
+
+
+/* FOOTER section */
 footer .banners{    
     padding-right: 15px;
     padding-left: 15px;
