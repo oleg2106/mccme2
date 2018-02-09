@@ -170,11 +170,11 @@ from pipeline_mako import render_require_js_path_overrides
     
     function topMenuFixed(){
         if ($(window).scrollTop() > navHeight) {
-            $('#global-navigation').addClass('topheader-free');
             $('.course-material').addClass('fixed');
+            $('#global-navigation').addClass('topheader-free');
         } else {
-            $('.course-material').removeClass('fixed');
             $('#global-navigation').removeClass('topheader-free');
+            $('.course-material').removeClass('fixed');
         }
     }
     

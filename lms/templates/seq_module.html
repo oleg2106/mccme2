@@ -66,3 +66,23 @@
 
   <div id="seq_content" role="tabpanel"></div>
 </div>
+
+## fixed sequence-nav
+<script type="text/javascript">
+    var seqnavHeight;
+
+    function topSeqNavFixed(){
+        if ($(window).scrollTop() > seqnavHeight) {
+            $('.sequence-nav').addClass('fixed');
+        } else {
+            $('.sequence-nav').removeClass('fixed');
+        }
+    }
+
+    (function () {
+        seqnavHeight = $('.sequence-nav').offset().top;
+        $(window).bind('scroll', function(){
+            topSeqNavFixed();
+        });
+    }());
+</script>

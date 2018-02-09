@@ -2,6 +2,7 @@ $header_height: 50px;
 $header_border: solid 1px #e7e7e7;
 $seq_arrow_width: 50px;
 $seq_arrow_margin: $seq_arrow_width + 30px;
+$fill_bg: #fff;
 
 /* MAIN section */
 html body {
@@ -31,7 +32,7 @@ body .content-wrapper .container {
     top: 0;
     z-index: 100;
     width: 100% !important;
-    background-color: #fff;
+    background-color: $fill_bg;
     border-bottom: $header_border;
     text-align: left;    
 }
@@ -109,6 +110,24 @@ body .wrapper-course-material .course-tabs li a, .wrapper-course-material .cours
 
 /* CONTENT section */
 /* course page styles */
+
+/* fixed sequence-nav in seq_module.html*/
+.xmodule_display.xmodule_SequenceModule .sequence-nav.fixed {
+    position: fixed;
+    top: $header_height;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 100;
+    background-color: $fill_bg;    
+    margin: 0;
+}
+
+.xmodule_display.xmodule_SequenceModule .sequence-nav.fixed ol li button {
+    height: 25px;
+}
+/* -- end -- */
+
 #seq_content {
     margin: 0 $seq_arrow_margin;
 }
