@@ -139,8 +139,8 @@ body .wrapper-course-material .course-tabs li a, .wrapper-course-material .cours
     border-right-style: solid;
 }
 
-body .course-wrapper .course-content .vert-mod .vert > .xblock-student_view, 
-body .course-wrapper .courseware-results-wrapper .vert-mod .vert > .xblock-student_view {
+body .course-wrapper .course-content .vert-mod .vert:last-child > .xblock-student_view,
+body .course-wrapper .courseware-results-wrapper .vert-mod .vert:last-child > .xblock-student_view {
     border-bottom: none;
 }
 
