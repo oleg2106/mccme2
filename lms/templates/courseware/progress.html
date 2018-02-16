@@ -291,9 +291,9 @@ reverse_score_proc = 100 - score_proc
                                             <div class="chapter_title" id="chapter_${loop.index}">
                                                 <%
                                                 chapter_id = ''
-                                                findit = 'block@%s' % chapter['url_name']
+                                                ##findit = 'block@%s' % chapter['url_name']
                                                 for ch in course_chapters:
-                                                    if ch.endswith(findit):
+                                                    if ch.endswith(chapter['url_name']):
                                                         chapter_id = ch
                                                         break
                                                 %>
