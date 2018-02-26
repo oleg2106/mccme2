@@ -1,0 +1,21 @@
+/* Modal full height */
+.mce-container.mce-window, .modal-window.modal-editor {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100%;
+    height:100vh !important;
+}
+
+.modal-window.modal-editor .modal-content {
+    height: 100% !important;
+}
+
+[class*="view-"] .modal-window .CodeMirror,
+[class*="view-"] .modal-lg.modal-type-video .xmodule_edit.xmodule_VideoDescriptor .editor-with-tabs .tabs-wrapper,
+.modal-window.modal-editor .edit-xblock-modal iframe {
+    height: 70vh !important;
+}
+
+.edit-xblock-modal .modal-actions {
+    background-color: #eee;
+}
