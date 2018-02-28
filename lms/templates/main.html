@@ -60,8 +60,31 @@ from pipeline_mako import render_require_js_path_overrides
 
   <script type="text/javascript" src="${static.url(jsi18n_path)}"></script>
 
-  <link rel="icon" type="image/x-icon" href="${static.url(static.get_value('favicon_path', settings.FAVICON_PATH))}" />
-
+  ## oleg2106: favicon issue
+  <%
+  kpn = settings.MKTG_URLS.get('KURSITET_PLATFORM_NAME', 'kursitet').lower()
+  if kpn == 'sirius':
+      favicon = 'images/sirius'
+  elif kpn == 'sirius_test':
+      favicon = 'images/sirius_test'
+  elif kpn == 'olimpiada':
+      favicon = 'images/olimpiada'
+  elif kpn == 'olimpiada_test':
+      favicon = 'images/olimpiada_test'    
+  elif kpn == 'kursitet_test':
+      favicon = 'images/kursitet_test'
+  else:
+      favicon = 'images/kursitet'
+  %>  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="${static.url(favicon)}/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="${static.url(favicon)}/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="${static.url(favicon)}/favicon-16x16.png">
+  <link rel="manifest" href="${static.url(favicon)}/site.webmanifest">
+  <link rel="mask-icon" href="${static.url(favicon)}/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  
   <%static:css group='style-vendor'/>
   % if uses_bootstrap:
     <link rel="stylesheet" href="${static.url(self.attr.main_css)}" type="text/css" media="all" />
