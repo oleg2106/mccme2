@@ -1,4 +1,7 @@
+@charset "utf-8";
+
 $max_width: 1180px;
+$progress_bar_height: 20px;
 
 /* HEADER section */
 #global-navigation .user-dropdown-menu{
@@ -39,29 +42,34 @@ body .wrapper-course-material .course-material, .wrapper-preview-menu .preview-m
 
 /* PROGRESS section */
 .digit-b {
-    font-size: 4em;
-    line-height: 0.4em;
-}
-
-.digit-b-left {
-    float: left;
+    font-size: 3.5em;
+    line-height: 1;
+    position: relative;
 }
 
 .digit-b-item {
-    line-height: 0.8em;
+    padding-left: 25%;
 }
 
-.digit-b-right {
-    font-size: 0.5em;
-    vertical-align: baseline;
-}
-
-.progress-header-summary {
+.digit-b-item-label {
     font-size: 0.35em;
+    font-weight: bold;
+    position: absolute;
+    bottom:0;
+    left: 5%;
+}
+
+.digit-b-pass {
+    font-size: 0.55em;
+    position: absolute;
+    bottom:0;
+    right: 0;    
 }
 
 #main-progress-bar-striped-version2{
     margin: 40px 0;
+    position: relative;
+    border: 1px solid black;    
 }
 
 #main-progress-bar-striped-version2 .progress {
@@ -72,15 +80,25 @@ body .wrapper-course-material .course-material, .wrapper-preview-menu .preview-m
     margin-bottom: 10px;
 }
 
-.progress.progress-striped {
-    margin-bottom: 5px;
+.progress-legend {
+    margin-top: 7px;
+}
+
+.progress-bar-marker {
+    height: $progress_bar_height;
+    border-right: 2px solid black;
+    position: absolute;    
 }
 
 #main-progress-bar-version2 {
     float: right;
     background-color: #f5f5f5;
     background-image: none;
-    height: 20px;
+    height: $progress_bar_height;
+}
+
+.progress.progress-striped {
+    border-radius: 0px;
 }
 
 .grade-legend {
@@ -127,12 +145,89 @@ $i: 0;
     border-top: 1px solid #ccc;
 }
 
+.chapter_item:last-child {
+    border-bottom: none;
+}
+
 .chapter_item {
     color: #000;
     font-size: 1.4em;
     line-height: 1.5;
     padding: 1em 0;
     border-bottom: 1px solid #ccc;
+}
+
+.chapter_score {
+    float: right;
+    width: 25%;
+}
+
+/* Toggle List */
+/* SCSS Variables & Mixins */ 
+.chapters {
+    .chapter_item_box {
+        margin-left: 1em;
+        
+        input[type="checkbox"] {
+            display: none;
+            &:checked {
+                & + label {
+                    &:after {
+                            content: "\25BC";
+                    }
+                    & ~ div.chapter_score {
+                            display: none;
+                    }                    
+                    & ~ div.sections {
+                            display: block;
+                    }
+                }
+            }
+        }
+        label {
+            color: #a7a7a7;
+            cursor: pointer;
+            font-size: 0.85em;
+            vertical-align: middle;
+            webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            &:after {
+                    content: "\25B6";
+                    padding-left: 15px;
+            }
+        }
+        div.sections {
+            display: none;
+            border-top: none;
+        }
+    }
+}
+
+.sections.progress_subsections {
+    padding-top: 10px;
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+.progress_subsection_name, .progress_subsection_result {
+    display: inline-block;
+    padding-left: 25px;
+}
+
+.progress_subsections .scores dl {
+    margin-bottom: 0.4rem;
+}
+
+.progress_subsections .scores dd {
+    display: inline-block;
+    margin: 0;
+    margin-right: 0px;
+    margin-right: 20px;
+    padding-right: 1em;
 }
 
 

@@ -11,6 +11,7 @@ from openedx.core.djangolib.markup import HTML, Text
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.utils.http import urlquote_plus
+from lms.djangoapps.grades.new.course_grade_factory import CourseGradeFactory
 %>
 
 <%
@@ -20,20 +21,7 @@ course_url_name = default_course_url_name(course.id)
 course_url = reverse(course_url_name, kwargs={'course_id': unicode(course.id)})
 
 ## collect score, max score
-score = 0
-max_score = 0
-for chapter in courseware_summary:
-    if not chapter['display_name'] == "hidden":
-        for section in chapter['sections']:
-            score += section.all_total.earned
-            max_score += section.all_total.possible
-            if section.all_total.possible > 0:
-                proc = 100*float(section.all_total.earned)/float(section.all_total.possible)
-            endif
-        endfor
-    endif
-endfor
-score_proc = float("{:.3n}".format(100*float(score)/float(max_score)) if score > 0 and max_score > 0 else "0")
+score_proc = float("{:.3n}".format(100*grade_summary['percent']))
 reverse_score_proc = 100 - score_proc
 %>
 
@@ -59,7 +47,7 @@ reverse_score_proc = 100 - score_proc
     ## This JavaScript is being HTML-escaped because it historically has, and it is not clear what
     ## the correct syntax is. For safety, maintain the previous behavior.
     ## xss-lint: disable=mako-invalid-js-filter
-    ${progress_graph.body(grade_summary, course.grade_cutoffs, "grade-detail-graph", not course.no_grade, not course.no_grade)}
+    ##${progress_graph.body(grade_summary, course.grade_cutoffs, "grade-detail-graph", not course.no_grade, not course.no_grade)}
 </script>
 </%block>
 
@@ -85,57 +73,59 @@ reverse_score_proc = 100 - score_proc
                         ${_("Course Progress for Student '{username}' ({email})").format(username=student.username, email=student.email)}
                     </h2>
                 %endif
-                
-                <div class="row">
-                    <div class="digit-b col-12 ml-sm-auto col-sm-5 text-left">
-                        <div class="digit-b-left">
-                            <div class="digit-b-item">${score_proc}</div>
-                            <div class="progress-header-summary">пройдено</div>
-                        </div>
-                        <div class="digit-b-right">%</div>
-                    </div>
 
-                    <div class="digit-b col-12 col-sm-5 text-left">
-                        <div class="digit-b-left">
-                            <div class="digit-b-item">${"{:.4n}".format(float(score))}</div>
-                            <div class="progress-header-summary">набрано</div>
-                        </div>
-                        <div class="digit-b-right">баллов<br/> из ${"{:.4n}".format(float(max_score))}</div>
-                    </div>
-                </div>                
+                <%
+                    def range_backward(width):
+                        width = int(width)
+                        if width < 100:
+                            return width - 1
+                        return width
+                
+                    #backgrounds = ['#4fe696', '#ffdf7e', '#ffb657', '#ef54a1', '#fb336c']
+                    backgrounds = ['#61d836', '#ffdf7e', '#ffb657', '#ef54a1', '#fb336c']
+                    grade_sections = sorted(course.grade_cutoffs.items(), key=operator.itemgetter(1), reverse=True)
+                    gs = []
+                    width = 100
+                    found = False
+                    
+                    #print grade_sections
+                    for key, item in enumerate(grade_sections):
+                        old_width = width
+                        width = item[1] * 100
+                        if item == grade_sections[:-1]:
+                            range = '0 - %d' % (range_backward(width),)
+                        else:
+                            range = '%d - %d' % (width, range_backward(old_width))
+                        gs.append({'name': item[0], 'marker': width, 'bg': backgrounds[key], 'range': range})
+
+                        if not found:
+                            if score_proc > width:
+                                bg_earned = backgrounds[key]
+                                found = True
+                            else:
+                                bg_earned = backgrounds[key + 1]
+                                
+                    #do we pass the exam?
+                    ex_pass = False
+                    if bg_earned != backgrounds[len(gs)]:
+                        ex_pass = True
+                    
+                    # what to do with the last element?
+                    range = '0 - %d' % (range_backward(width),)
+                    gs.append({'name': 'Незачет', 'marker': False, 'bg': backgrounds[len(gs)], 'range': range})
+                %>                
+
+                <div class="digit-b">
+                    <div class="digit-b-item-label">Набрано</div>
+                    <div class="digit-b-item" style="color: ${bg_earned};">${score_proc}%</div>
+                    % if ex_pass:
+                        <div class="digit-b-pass" style="color: ${bg_earned};">${gs[0]['name'].upper()}</div>
+                    %endif
+                </div>
             
                 <div class="row">
                     <br>
-                    
-                    <%
-                        backgrounds = ['#4fe696', '#ffdf7e', '#ffb657', '#ef54a1', '#fb336c']
-                        grade_sections = sorted(course.grade_cutoffs.items(), key=operator.itemgetter(1), reverse=True)
-                        gs = []
-                        width = 100
-                        found = False
-                        
-                        #print grade_sections
-                        for key, item in enumerate(grade_sections):
-                            old_width = width
-                            width = item[1] * 100
-                            if item == grade_sections[:-1]:
-                                range = '0 - ' + width
-                            else:
-                                range = '%d - %d' % (width, old_width)
-                            gs.append({'name': item[0], 'width': old_width, 'bg': backgrounds[key], 'range': range})
-
-                            if not found:
-                                if score_proc > width:
-                                    bg_earned = backgrounds[key]
-                                    found = True
-                                else:
-                                    bg_earned = backgrounds[key + 1]
-                                    
-                        # what to do with last element?
-                        range = '0 - %d' % width
-                        gs.append({'name': 'Незачет', 'width': width, 'bg': backgrounds[len(gs)], 'range': range})
-                    %>
-                    
+                   
                     <div class="col-md-12 text-left">
                         <div id="main-progress-bar-striped-version2">
                             <div class="grade-bar">
@@ -154,11 +144,18 @@ reverse_score_proc = 100 - score_proc
                                 </ol>
                             </div>
                             <div class="progress progress-striped" style="background: ${bg_earned};">
+                                %for item in reversed(gs):
+                                    %if item['marker'] and score_proc < item['marker']:
+                                        <div class="progress-bar-marker" style="width: ${item['marker']}%;">
+                                        </div>
+                                    %endif
+                                %endfor
                                 <div id="main-progress-bar-version2" class="progress-bar progress-bar-info" role="progressbar"
-                                    aria-valuenow="${score_proc}" aria-valuemin="0" aria-valuemax="100" style="border: 1px solid ${bg_earned}; width: ${reverse_score_proc}%">
+                                    aria-valuenow="${score_proc}" aria-valuemin="0" aria-valuemax="100" style="width: ${reverse_score_proc}%">
                                 </div>
+                                
                             </div>
-                            <div class="pull-right">
+                            <div class="progress-legend pull-right">
                                 %for item in reversed(gs):
                                     <div class="grade-legend">
                                         <div class="grade-legend-item" style="background: ${item['bg']};"></div>
@@ -278,17 +275,33 @@ reverse_score_proc = 100 - score_proc
                     %for chapter in courseware_summary:
                         %if not chapter['display_name'] == "hidden":
                             <%
-                            earned = 0
-                            total  = 0
+                            show_section    = False
+                            chapter_percent = 0
+                            chapter_weight  = 0
+                            progress_sections = {}
                             for section in chapter['sections']:
-                                earned += section.all_total.earned
-                                total += section.all_total.possible
+                                if len(section.problem_scores.values()) > 0:
+                                    show_section = True
+                                    
+                                    #let's count total weight and save weightes
+                                    if section.format is not None and section.format in grade_summary['grade_breakdown']:
+                                        _section_percent = 100*float(grade_summary['grade_breakdown'][section.format]['percent'])
+                                        _section_weight  = 100*float(grade_summary['grade_breakdown'][section.format]['weight'])
+                                        chapter_percent += _section_percent
+                                        chapter_weight  += _section_weight
+                                        progress_sections[section.url_name] = {'percent': _section_percent, 'weight': _section_weight}
+                                        
+                            # check the appeal
+                            appeal = False
+                            if chapter['display_name'].strip().lower() == u"апелляция":
+                                appeal = True
                             %>
-                            %if total > 0 or earned > 0:
+
+                            %if show_section:
                                 <div class="chapter_item">
                                     <div class="row">
-                                        <div class="col-12 ml-sm-auto col-sm-5">
-                                            <div class="chapter_title" id="chapter_${loop.index}">
+                                        <div class="col-12">
+                                            <div class="chapter_item_box chapter_title" id="chapter_${loop.index}">
                                                 <%
                                                 chapter_id = ''
                                                 ##findit = 'block@%s' % chapter['url_name']
@@ -302,13 +315,69 @@ reverse_score_proc = 100 - score_proc
                                                 %else:
                                                     ${chapter['display_name']}
                                                 %endif
-                                                ##<a href="${reverse('courseware_chapter', kwargs=dict(course_id=course.id.to_deprecated_string(), chapter=chapter['url_name']))}">111</a>
-                                                ##<a href="${course_url}#${unicode(section.location)}">${ chapter['display_name']}</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-5 text-left">
-                                            <div class="chapter_score">
-                                                ${("{earned} из {total}").format(earned='{:.3n}'.format(float(earned)), total='{:.3n}'.format(float(total))) | h}
+                                                
+                                                %if not appeal:
+                                                    <input type="checkbox" id="box_${loop.index}">
+                                                    <label for="box_${loop.index}"></label>
+                                                    <div class="chapter_score">
+                                                        %if chapter_weight:
+                                                            ${("Набрано {earned}% из {total}%").format(earned='{:.3n}'.format(chapter_percent), total='{:.3n}'.format(chapter_weight)) | h}
+                                                        %endif
+                                                    </div>
+                                                    <div class="sections progress_subsections">
+                                                        %for section in chapter['sections']:
+                                                            <div class="row">
+                                                                <%
+                                                                earned = section.all_total.earned
+                                                                total = section.all_total.possible
+                                                                percentageString = "{0:.0%}".format( float(earned)/total) if earned > 0 and total > 0 else ""
+                                                                %>
+                                                                %if len(section.problem_scores.values()) > 0:
+                                                                    <div class="col-12 ml-sm-auto col-sm-9">
+                                                                        <div class="progress_subsection_name">
+                                                                            ${ section.display_name}
+                                                                        </div>
+                                                                        <div class="progress_subsection_result">
+                                                                            %if section.show_grades(staff_access):                                                                
+                                                                            <dl class="scores">
+                                                                                %for score in section.problem_scores.values():
+                                                                                    <dd>${"{0:.3n}/{1:.3n}".format(float(score.earned),float(score.possible))}</dd>
+                                                                                %endfor
+                                                                            </dl>
+                                                                            %else:
+                                                                                <p class="hide-scores">
+                                                                                %if section.show_correctness == 'past_due':
+                                                                                    %if section.graded:
+                                                                                    ${_("Problem scores are hidden until the due date.")}
+                                                                                    %else:
+                                                                                    ${_("Practice scores are hidden until the due date.")}
+                                                                                    %endif
+                                                                                %else:
+                                                                                    %if section.graded:
+                                                                                    ${_("Problem scores are hidden.")}
+                                                                                    %else:
+                                                                                    ${_("Practice scores are hidden.")}
+                                                                                    %endif
+                                                                                %endif
+                                                                                </p>
+                                                                            %endif
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 ml-sm-auto col-sm-3">
+                                                                        %if section.format is not None and section.url_name in progress_sections:
+                                                                            ${("{earned}% из {total}%").format(earned='{:.3n}'.format(progress_sections[section.url_name]['percent']), 
+                                                                                                            total='{:.3n}'.format(progress_sections[section.url_name]['weight'])) | h}
+                                                                        %endif
+                                                                    </div>                                                                
+                                                                %endif
+                                                            </div>
+                                                        %endfor
+                                                    </div>
+                                                %elif chapter_percent:
+                                                    <div class="chapter_score">
+                                                        ${("{earned}%").format(earned='{:.3n}'.format(chapter_percent)) | h}
+                                                    </div>                                                    
+                                                %endif
                                             </div>
                                         </div>
                                     </div>
