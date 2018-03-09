@@ -15,7 +15,23 @@ from branding import api as branding_api
   <div class="logo">
     <a href="${marketing_link('ROOT')}">
       <%block name="navigation_logo">
-      <img src="${branding_api.get_logo_url(is_secure)}" alt="${_("{platform_name} Home Page").format(platform_name=static.get_platform_name())}"/>
+        ## oleg2106: logo issue
+        <%
+        kpn_logo = settings.MKTG_URLS.get('KURSITET_PLATFORM_NAME', 'kursitet').lower()
+        if kpn_logo == 'sirius':
+            logo = 'images/sirius'
+        elif kpn_logo == 'sirius_test':
+            logo = 'images/sirius_test'
+        elif kpn_logo == 'olimpiada':
+            logo = 'images/olimpiada'
+        elif kpn_logo == 'olimpiada_test':
+            logo = 'images/olimpiada_test'    
+        elif kpn_logo == 'kursitet_test':
+            logo = 'images/kursitet_test'
+        else:
+            logo = 'images/kursitet'
+        %>
+        <img src="${static.url(logo)}/logo.png" alt="${_("{platform_name} Home Page").format(platform_name=static.get_platform_name())}"/>
       </%block>
     </a>
   </div>
