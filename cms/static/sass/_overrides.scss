@@ -12,7 +12,9 @@
 
 [class*="view-"] .modal-window .CodeMirror,
 [class*="view-"] .modal-lg.modal-type-video .xmodule_edit.xmodule_VideoDescriptor .editor-with-tabs .tabs-wrapper,
-.modal-window.modal-editor .edit-xblock-modal iframe {
+.modal-window.modal-editor .edit-xblock-modal iframe,
+.modal-content .xblock--drag-and-drop--editor,
+[class*="view-"] .modal-window .editor-with-buttons.wrapper-comp-settings .list-input.settings-list {
     height: 70vh !important;
 }
 
