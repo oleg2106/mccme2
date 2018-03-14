@@ -40,6 +40,12 @@ body .wrapper-course-material .course-material, .wrapper-preview-menu .preview-m
 }
 
 
+/* CONTENT xmodule */
+body .xmodule_display.xmodule_CapaModule .problem .inputtype.option-input {
+    margin-top: 0;
+}
+
+
 /* PROGRESS section */
 .digit-b {
     font-size: 3.5em;
