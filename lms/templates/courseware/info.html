@@ -55,18 +55,6 @@ from openedx.features.course_experience import SHOW_REVIEWS_TOOL_FLAG
       lang="${course.language}"
     % endif
     >
-      <div class="home">
-        <div class="page-header-main">
-            <h2 class="hd hd-2 page-title">${_("Welcome to {org}'s {course_name}!").format(org=course.display_org_with_default, course_name=course.display_number_with_default)}
-              <div class="page-subtitle">${course.display_name_with_default}</div>
-            </h2>
-        </div>
-        % if resume_course_url and user_is_enrolled:
-          <div class="page-header-secondary">
-              <a href="${resume_course_url}" class="last-accessed-link">${_("Resume Course")}</a>
-          </div>
-        % endif
-      </div>
       <div class="info-wrapper">
       % if user.is_authenticated():
         <section class="updates">
