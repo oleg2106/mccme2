@@ -108,6 +108,13 @@ label {
 }
 
 
+/* BOOKMARKS section */
+#course-container .course-sidebar .section.section-tools .hd-6,
+#course-container .course-sidebar .section.section-dates .handouts-header {
+    display: none;
+}
+
+
 /* CONTENT section */
 .course-outline .block-tree .section ol.outline-item {
     margin-left: 40px;
