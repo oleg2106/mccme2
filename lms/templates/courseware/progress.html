@@ -3,6 +3,7 @@
 <%namespace name='static' file='/static_content.html'/>
 <%def name="online_help_token()"><% return "progress" %></%def>
 <%!
+
 from course_modes.models import CourseMode
 from certificates.models import CertificateStatuses
 from django.utils.translation import ugettext as _
@@ -10,7 +11,7 @@ from openedx.core.djangolib.markup import HTML, Text
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.utils.http import urlquote_plus
-%>
+
 <%block name="bodyclass">view-in-course view-progress</%block>
 
 <%block name="headextra">
@@ -33,7 +34,7 @@ from django.utils.http import urlquote_plus
     ## This JavaScript is being HTML-escaped because it historically has, and it is not clear what
     ## the correct syntax is. For safety, maintain the previous behavior.
     ## xss-lint: disable=mako-invalid-js-filter
-    ${progress_graph.body(grade_summary, course.grade_cutoffs, "grade-detail-graph", not course.no_grade, not course.no_grade)}
+
 </script>
 </%block>
 
@@ -52,7 +53,7 @@ from django.utils.http import urlquote_plus
                     <a class="instructor-info-action studio-view" href="${studio_url}">${_("View Grading in studio")}</a>
                 </div>
                 % endif
-                
+
                 %if false:
                 <h2 class="hd hd-2 progress-certificates-title">
                     ${_("Course Progress for Student '{username}' ({email})").format(username=student.username, email=student.email)}
@@ -87,6 +88,7 @@ from django.utils.http import urlquote_plus
 
                 %if not course.disable_progress_graph:
                 <div class="grade-detail-graph" id="grade-detail-graph"></div>
+
                 %endif
 
                 % if credit_course_requirements:
@@ -151,6 +153,7 @@ from django.utils.http import urlquote_plus
                 %endif
 
                 %if courseware_summary:
+
                 <section class="chapters">
                     <h2 class="sr">${_('Details for each chapter')}</h2>
                     %for chapter in courseware_summary:
@@ -218,6 +221,7 @@ from django.utils.http import urlquote_plus
                                 %endfor
                             </div>
                         </section>
+
                         %endif
                     %endfor
                 </section>

@@ -26,6 +26,12 @@ body .wrapper-course-material .course-material, .wrapper-preview-menu .preview-m
 }
 
 
+/* BOOKMARKS section */
+div.info-wrapper section.handouts .action-show-bookmarks {
+    margin-bottom: 15px;
+}
+
+
 /* CONTENT section */
 .content-wrapper {
     max-width: $max_width;
@@ -37,6 +43,12 @@ body .wrapper-course-material .course-material, .wrapper-preview-menu .preview-m
 
 #wiki-content .nav{
     display: block;
+}
+
+
+/* CONTENT xmodule */
+body .xmodule_display.xmodule_CapaModule .problem .inputtype.option-input {
+    margin-top: 0;
 }
 
 

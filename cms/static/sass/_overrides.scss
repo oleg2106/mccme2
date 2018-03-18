@@ -1,3 +1,10 @@
+/* nav-course needs more space*/
+.is-signedin.course .wrapper .wrapper-header .nav-course {
+    width: 60%;
+}
+
+
+/* Let's make dialog window wider */
 /* Modal full height */
 .mce-container.mce-window, .modal-window.modal-editor {
     top: 0 !important;
@@ -20,4 +27,10 @@
 
 .edit-xblock-modal .modal-actions {
     background-color: #eee;
+}
+
+
+/* XMODULES */
+.xmodule_display.xmodule_CapaModule .problem .inputtype.option-input {
+    margin-top: 0px;
 }

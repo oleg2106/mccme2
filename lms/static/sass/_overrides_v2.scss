@@ -108,13 +108,20 @@ label {
 }
 
 
+/* BOOKMARKS section */
+#course-container .course-sidebar .section.section-tools .hd-6,
+#course-container .course-sidebar .section.section-handouts .hd-6 {
+    display: none;
+}
+
+#course-container .course-sidebar .section.section-handouts ol {
+    margin-left: 0;
+}
+
+
 /* CONTENT section */
 .course-outline .block-tree .section ol.outline-item {
     margin-left: 40px;
-}
-
-.home .page-header-main .page-title {
-    color: #4a4a4a;
 }
 
 
