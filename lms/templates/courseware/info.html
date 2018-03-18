@@ -55,6 +55,18 @@ from openedx.features.course_experience import SHOW_REVIEWS_TOOL_FLAG
       lang="${course.language}"
     % endif
     >
+      <div class="home">
+        <div class="page-header-main">
+            <h2 class="hd hd-2 page-title">${_("Welcome to {org}'s {course_name}!").format(org=course.display_org_with_default, course_name=course.display_number_with_default)}
+              <div class="page-subtitle">${course.display_name_with_default}</div>
+            </h2>
+        </div>
+        % if resume_course_url and user_is_enrolled:
+          <div class="page-header-secondary">
+              <a href="${resume_course_url}" class="last-accessed-link">${_("Resume Course")}</a>
+          </div>
+        % endif
+      </div>
       <div class="info-wrapper">
       % if user.is_authenticated():
         <section class="updates">
@@ -71,6 +83,7 @@ from openedx.features.course_experience import SHOW_REVIEWS_TOOL_FLAG
 
         </section>
         <section aria-label="${_('Handout Navigation')}" class="handouts">
+          <h3 class="hd hd-3 handouts-header">${_("Course Tools")}</h3>
             <div>
                 <a class="action-show-bookmarks" href="${reverse('openedx.course_bookmarks.home', args=[course.id])}">
                     <span class="icon fa fa-bookmark" aria-hidden="true"></span>
@@ -87,6 +100,7 @@ from openedx.features.course_experience import SHOW_REVIEWS_TOOL_FLAG
           % if SelfPacedConfiguration.current().enable_course_home_improvements:
             ${HTML(dates_fragment.body_html())}
           % endif
+            <h3 class="hd hd-3  handouts-header">${_(course.info_sidebar_name)}</h3>
             ${HTML(get_course_info_section(request, masquerade_user, course, 'handouts'))}
         </section>
       % else:
